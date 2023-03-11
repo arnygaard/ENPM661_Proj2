@@ -13,7 +13,7 @@ IPython import display,
 re
 
 
-In order to run the algorithm correctly, first make sure to run the code in a compiler. I used VSC. 
+In order to run the algorithm correctly, first make sure to run the code in a compiler. I used VSC. This has not been tested running off a terminal command.
 
 When running the code, you will be asked to input start and goal points. Make sure to enter each number seperately, as stated by the instructions in the terminal. Only enter one coordinate at a time, as the code will not accept xy coordinate pairs for start and goal nodes.
 
