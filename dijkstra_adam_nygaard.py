@@ -154,8 +154,6 @@ def backtrack(cost_map, start, goal):
     sy = start[1]
     path_nodes = []
     pnode = []
-    print('start',sx,sy)
-    print('end',gx,gy)
     lowest_cost = cost_map[gx,gy]
     pnode = [gx,gy]
     path_nodes.append(pnode)
@@ -215,7 +213,6 @@ def backtrack(cost_map, start, goal):
                 lowest_cost = cost_map[gx-1,gy]
                 pnode = [gx-1,gy]
                 path_nodes.append(pnode)
-        print(lowest_cost)
     path_nodes.reverse()
     return path_nodes
 
@@ -238,6 +235,11 @@ gy = int(input())
 print('Start Node:',sx, sy)
 print('Goal Node:',gx, gy)
 Xs = [sx, sy]
+
+if gy >= 250:
+    gy = 249
+if gx >= 600:
+    gx = 599
 goal = [gx, gy]
 
 #checking for goalpoint or start point in obstacle
@@ -248,14 +250,16 @@ if map_empty[sx,sy,0] != 0:
     print("start lies in obstacle")
     sys.exit()
 
+print(' ')
+print('Print path coordinates after completion? (y/n)')
+print_path = str(input())
+
 #start timer
 start_time = time.time()
 
 #initializing lists and first cost of start node
 OpenList = []
 ClosedList = []
-# Xs = [0,0]
-# goal = [10, 10]
 goal_state = 1
 tcost = []
 cost_map[Xs[0],Xs[1]] = 0
@@ -283,7 +287,9 @@ while OpenList and goal_state != 0:
 
 #find path from backtrack function
 path = backtrack(cost_map, Xs, goal)
-print("path:", path)          
+
+if print_path == 'y':
+    print("path:", path)          
 
 #plotting path
 for node in path:
