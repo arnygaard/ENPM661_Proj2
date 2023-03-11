@@ -144,6 +144,8 @@ def CalcCost(child, parent):
 def backtrack(cost_map, start, goal):
     gx = goal[0]
     gy = goal[1]
+    tx = 0
+    ty = 0
     #ensuring values stay within bounds
     if goal == [600, 250]:
         gx = gx - 1
@@ -152,11 +154,13 @@ def backtrack(cost_map, start, goal):
     sy = start[1]
     path_nodes = []
     pnode = []
-    goal_cost = cost_map[gx,gy]
+    print('start',sx,sy)
+    print('end',gx,gy)
     lowest_cost = cost_map[gx,gy]
     pnode = [gx,gy]
     path_nodes.append(pnode)
     while pnode != start:
+        path_nodes.append(pnode)
         gx = pnode[0]
         gy = pnode[1]
         if gx < 599:
@@ -182,6 +186,7 @@ def backtrack(cost_map, start, goal):
 
         if gx > 0 and gy > 0:
             if cost_map[gx-1,gy-1] < lowest_cost and cost_map[gx-1,gy-1] >= 0 and gx < 600 and gy < 250:
+                path_nodes.pop()
                 lowest_cost = cost_map[gx-1,gy-1]
                 pnode = [gx-1,gy-1]
                 path_nodes.append(pnode)
@@ -210,7 +215,7 @@ def backtrack(cost_map, start, goal):
                 lowest_cost = cost_map[gx-1,gy]
                 pnode = [gx-1,gy]
                 path_nodes.append(pnode)
-
+        print(lowest_cost)
     path_nodes.reverse()
     return path_nodes
 
@@ -243,6 +248,9 @@ if map_empty[sx,sy,0] != 0:
     print("start lies in obstacle")
     sys.exit()
 
+#start timer
+start_time = time.time()
+
 #initializing lists and first cost of start node
 OpenList = []
 ClosedList = []
@@ -257,13 +265,9 @@ OpenList.append(Xs)
 while OpenList and goal_state != 0:
 
     Node_State_i = OpenList.pop(0)
-    #ClosedList.append(Node_State_i)
     if Node_State_i == goal:
-        #backtrack
         print('SUCCESS')
-        
         break
-    
     
     testing_node = moveset(map_empty, Node_State_i)
     for item in testing_node:
@@ -287,9 +291,14 @@ for node in path:
     y = node[1]
     map_empty[x,y,:] = [255, 255, 255]
 
-map = np.transpose(map_empty, (1, 0, 2))
+#create final map
+map_final = np.transpose(map_empty, (1, 0, 2))
 
-plt.imshow(map)
+#end timer and print
+print("Djisktra's search took %s seconds" % (time.time() - start_time))
+
+#plot map
+plt.imshow(map_final)
 plt.gca().invert_yaxis()
 plt.show()
 
