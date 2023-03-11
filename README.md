@@ -1,15 +1,15 @@
 # ENPM661_Proj2
 Libraries needed to run code:
 
-matplotlib
-numpy as np
-cv2 as cv
-matplotlib.pyplot as plt
-matplotlib.animation as animation
-time
-sys
-glob
-IPython import display
+matplotlib,
+numpy as np,
+cv2 as cv,
+matplotlib.pyplot as plt,
+matplotlib.animation as animation,
+time,
+sys,
+glob,
+IPython import display,
 re
 
 
