@@ -11,6 +11,7 @@ import glob
 from IPython import display
 import os
 
+#used from OpenCV Tuturial
 numbers = re.compile(r"(\d+)")
 def numericalSort(value):
     parts = numbers.split(value)
@@ -19,16 +20,16 @@ def numericalSort(value):
 
 c = 0
 img_array = []
-
-for filename in sorted(glob.glob(r"C:/Users/Adam's PC/OneDrive/Desktop/661/images/*.jpg"), key=numericalSort):
+for filename in sorted(glob.glob(r"C:/Users/Adam's PC/OneDrive/Desktop/661/images/*.jpg"), key=numericalSort): #Change directory to your directory
+    #only appending every 5th frame otherwise computer crashes
     if int(filename[-6:][1]) % 5 == 0:
         img = cv.imread(filename)
         height, width, layers = img.shape
         size = (width,height)
         img_array.append(img)
 
- 
-out = cv.VideoWriter('results2.avi',cv.VideoWriter_fourcc(*'DIVX'), 15, size) #cv.VideoWriter_fourcc(*'DIVX')
+#output video
+out = cv.VideoWriter('results2.avi',cv.VideoWriter_fourcc(*'DIVX'), 15, size)
  
 for i in range(len(img_array)):
     out.write(img_array[i])
