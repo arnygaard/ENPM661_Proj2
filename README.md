@@ -1,16 +1,16 @@
 # ENPM661_Proj2
 Libraries needed to run code:
 
-import matplotlib
-import numpy as np
-import cv2 as cv
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import time
-import sys
-import glob
-from IPython import display
-import re
+matplotlib
+numpy as np
+cv2 as cv
+matplotlib.pyplot as plt
+matplotlib.animation as animation
+time
+sys
+glob
+IPython import display
+re
 
 
 In order to run the algorithm correctly, first make sure to run the code in a compiler. I used VSC. 
