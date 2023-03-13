@@ -73,11 +73,13 @@ map_copy = map_empty.copy()
 #5mm buffer as called for
 buffer = 5
 
+#boundary buffer
+
 #creating square shape dimensions and assigning pixel values to map
-x_square_start = 450
-x_square_end = 550
-y_square_start = 50
-y_square_end = 230
+x_square_start = 100
+x_square_end = 150
+y_square_start = 0
+y_square_end = 100
 for i in range(x_square_start, x_square_end):
     for j in range(y_square_start, y_square_end):
         map_empty[i,j,:] = [239,76,76]
@@ -86,38 +88,99 @@ for i in range(x_square_start, x_square_end):
 for i in range(x_square_start-buffer, x_square_end+buffer):
     for j in range(y_square_start-buffer, y_square_end+buffer):
             if map_empty[i,j,0] != 239:
-                map_empty[i,j,:] = [200,16,16]
-        
-#creating half circle dimensions and assigning pixel values to map
-x_hc = 300
-hc_r = 100
-y_hc = 120
-for i in range(x_hc - hc_r, x_hc + hc_r):
-    for j in range(y_hc - hc_r, y_hc + hc_r):
-        if (i - x_hc) **2 + (j - y_hc)**2 <= hc_r**2 and j > y_hc:
-            map_empty[i,j,:] = [239,76,76]
+                map_empty[i,j,:] = [239,76,76]
+
+x_square_start = 100
+x_square_end = 150
+y_square_start = 150
+y_square_end = 249
+for i in range(x_square_start, x_square_end):
+    for j in range(y_square_start, y_square_end):
+        map_empty[i,j,:] = [239,76,76]
 
 #plotting buffer zone
-for i in range(x_hc - hc_r - buffer, x_hc + hc_r + buffer):
-    for j in range(y_hc - hc_r - buffer, y_hc + hc_r + buffer):
-        if (i - x_hc) **2 + (j - y_hc)**2 <= (hc_r+buffer)**2 and j > y_hc - 5 and map_empty[i,j,0] != 239:
-            map_empty[i,j,:] = [200,16,16]
+for i in range(x_square_start-buffer, x_square_end+buffer):
+    for j in range(y_square_start-buffer, y_square_end):
+            if map_empty[i,j,0] != 239:
+                map_empty[i,j,:] = [239,76,76]
 
-#creating diagonal wall dimensions and assigning pixel values to map
-x_wall_start = 80
+#hexagon background
+x_square_start = 230
+x_square_end = 370
+y_square_start = 45
+y_square_end = 205
+for i in range(x_square_start, x_square_end):
+    for j in range(y_square_start, y_square_end):
+        map_empty[i,j,:] = [239,76,76]
+
+
+#cutting out corners of hexagon background to create hexagon. 5mm buffer accounted for
+x_wall_start = 200
 x_wall_end = 300
 y_wall_start = 0
 y_wall_end = 100
 for i in range(x_wall_start, x_wall_end):
     for j in range(y_wall_start, y_wall_end):
-        if 0.25*i < j and 0.25*i + 25 > j: 
+        if -0.57*i < j and -0.57*i + 216 > j: 
+            map_empty[i,j,:] = [0,0,0]
+
+x_wall_start = 280
+x_wall_end = 400
+y_wall_start = 0
+y_wall_end = 200
+for i in range(x_wall_start, x_wall_end):
+    for j in range(y_wall_start, y_wall_end):
+        if 0.57*i - 125 > j and 0.57*i - 255 < j: 
+            map_empty[i,j,:] = [0,0,0]
+
+x_wall_start = 200
+x_wall_end = 400
+y_wall_start = 0
+y_wall_end = 220
+for i in range(x_wall_start, x_wall_end):
+    for j in range(y_wall_start, y_wall_end):
+        if 0.57*i + 80 > j and 0.57*i + 34 < j: 
+            map_empty[i,j,:] = [0,0,0]
+
+x_wall_start = 290
+x_wall_end = 400
+y_wall_start = 0
+y_wall_end = 220
+for i in range(x_wall_start, x_wall_end):
+    for j in range(y_wall_start, y_wall_end):
+        if -0.57*i + 375 < j and -0.57*i + 495 > j: 
+            map_empty[i,j,:] = [0,0,0]
+
+
+#triangle with 5mm buffer accounted for
+x_wall_start = 460 - buffer
+x_wall_end = 510 + buffer
+y_wall_start = 125
+y_wall_end = 240
+for i in range(x_wall_start, x_wall_end):
+    for j in range(y_wall_start, y_wall_end):
+        if -7/4*i < j and -7/4*i + 1026 > j: 
             map_empty[i,j,:] = [239,76,76]
 
-#plotting buffer zone
-for i in range(x_wall_start - buffer, x_wall_end + buffer):
-    for j in range(y_wall_start - buffer, y_wall_end + buffer):
-        if 0.25*i < j+buffer and 0.25*i + 25 > j-buffer and map_empty[i,j,0] != 239: 
-            map_empty[i,j,:] = [200,16,16]
+x_wall_start = 460 - buffer
+x_wall_end = 510 + buffer
+y_wall_start = 0
+y_wall_end = 125
+for i in range(x_wall_start, x_wall_end):
+    for j in range(y_wall_start, y_wall_end):
+        if 7/4*i - 776 < j and 7/4*i > j: 
+            map_empty[i,j,:] = [239,76,76]
+
+for i in range(0,600):
+    for j in range(0,250):
+        if i < 6:
+            map_empty[i,j,:] = [239,76,76]
+        if i > 594:
+            map_empty[i,j,:] = [239,76,76]
+        if j < 6:
+            map_empty[i,j,:] = [239,76,76]
+        if j > 244:
+            map_empty[i,j,:] = [239,76,76]
 
 #creating cost map of the map with included obstacles. -1 if within obstacle, 1E9 otherwise
 dim = (600,250)
@@ -309,7 +372,7 @@ plt.gca().invert_yaxis()
 plt.show()
 
 #writing individual frames to folder that show djikstra search
-#ClosedList.append(goal)
+# ClosedList.append(goal)
 # ims = []
 # c = 0
 # for item in ClosedList:
