@@ -22,3 +22,5 @@ If you want to have the path printed out node-by-node, input y when asked.
 the source code will display the optimal path in the obstacle space by default.
 
 If you input coordinates inside an obstacle, the program will output a failure message and will need to be rerun.
+
+UPDATE 3/12: I realized that the map I had been using was wrong. I have changed the map since then.
